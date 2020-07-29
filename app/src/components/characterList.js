@@ -1,32 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCharacter } from "../actions/action";
+import characterCard from './characterCard';
 
-const characterList = (props) => {
-  const fetchCharacters = (e) => {
+const characterList = props => {
+  const fetchChars = e => {
     e.preventDefault();
     props.fetchCharacter();
   };
-
   return (
-    <div>
-      <h1>Rick and Morty</h1>
-      <div>
-        {props.character.map((characters) => (
-          <h4 key={characters.id}>{characters.name}</h4>
+    <>
+      {props.isFetching && <p>Fetching Characters</p>}
+      <div className="CharacterList">
+        {props.characters.map(character => (
+          <characterCard character={character} />
         ))}
       </div>
-      {props.error && <p>{props.error}</p>}
-      <button onClick={(e) => fetchCharacters(e)}>Fetch Characters!</button>
-    </div>
-  );
-};
+      {props.error && <p className='errer'>{props.error}</p>}
+      <button onClick={fetchChars}>Fetch Characters!</button>
+    </>
+  )
+}
 
-const mapStateToProps = (state) => {
-  return {
-    data: state.data,
-    error: state.error,
-  };
-};
+const mapStateToProps = state => ({
+  characters: state.characters,
+  error: state.error,
+  isFetching: state.isFetching
+})
 
-export default connect(mapStateToProps, { fetchCharacter })(characterList);
+export default connect(mapStateToProps, { fetchCharacter })(characterList)
