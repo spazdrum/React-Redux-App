@@ -16,17 +16,19 @@ export const charReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetchingData: true,
-        data: [],
+        error: null
       };
     case FETCH_CHARACTER_SUCCESS:
       return {
         ...state,
+        characters: action.payload,
         isFetchingData: false,
-        data: action.payload,
+        error: null
       };
     case FETCH_CHARACTER_ERROR:
       return {
         ...state,
+        characters: [],
         isFetchingData: false,
         error: action.payload,
       };
