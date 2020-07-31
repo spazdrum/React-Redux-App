@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 
-const characterCard = props => {
+const CharacterCard = props => {
   return (
     <div className='character'>
       <h2>Name: {props.character.name}</h2>
@@ -11,5 +10,5 @@ const characterCard = props => {
   )
 }
 
-export default characterCard;
+export default CharacterCard;
 
