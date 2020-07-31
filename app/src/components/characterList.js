@@ -1,32 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchCharacter } from "../actions/action";
+import getData from "../actions/action";
 
 const characterList = (props) => {
-  const fetchCharacters = (e) => {
-    e.preventDefault();
-    props.fetchCharacter();
-  };
+  console.log("characterList: ", props);
+  props.getData();
 
   return (
-    <div>
-      <h1>Rick and Morty</h1>
-      <div>
-        {props.character.map((characters) => (
-          <h4 key={characters.id}>{characters.name}</h4>
-        ))}
-      </div>
-      {props.error && <p>{props.error}</p>}
-      <button onClick={(e) => fetchCharacters(e)}>Fetch Characters!</button>
-    </div>
+    <>
+      {props.error ? (
+        <div>{props.error}</div>
+      ) : (
+        props.results.map((card) => <div>{card.name}</div>)
+      )}
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    data: state.data,
+    results: state.results,
     error: state.error,
   };
 };
 
-export default connect(mapStateToProps, { fetchCharacter })(characterList);
+export default connect(mapStateToProps, { getData })(characterList);

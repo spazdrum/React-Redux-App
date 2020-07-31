@@ -4,7 +4,7 @@ export const FETCH_CHARACTER_START = "FETCH_CHARACTER_START";
 export const FETCH_CHARACTER_SUCCESS = "FETCH_CHARACTER_SUCCESS";
 export const FETCH_CHARACTER_ERROR = "FETCH_CHARACTER_ERROR";
 
-export const fetchCharacter = (dispatch) => {
+const getData = (dispatch) => {
   axios
     .get("https://rickandmortyapi.com/api/character/")
     .then((res) => {
@@ -18,3 +18,5 @@ export const fetchCharacter = (dispatch) => {
       });
     });
 };
+
+export default getData;
